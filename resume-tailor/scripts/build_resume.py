@@ -46,12 +46,12 @@ def load_master():
         f"<b>Practices:</b> {practices}"
     )
 
-    summary = (
+    summary = m.get("summary", (
         "Software engineer with 3+ years building and optimizing high-throughput, "
         "production-critical data systems at a global bank. Strong CS/algorithms "
         "foundation (Cornell BS), deep Python proficiency, and hands-on fluency with "
         "agentic coding workflows and LLM APIs."
-    )
+    ))
 
     experience = []
     for exp in m["experience"]:
