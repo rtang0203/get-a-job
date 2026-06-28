@@ -1,0 +1,11 @@
+{
+  "company_slug": "IMC",
+  "contact": "rtang0203@gmail.com&nbsp;&nbsp;|&nbsp;&nbsp;732-666-2746",
+  "summary": "Software engineer with 3+ years building and optimizing high-throughput, production-critical data systems at a global bank \u2014 pipelines processing tens of millions of transactions daily. Strong CS/algorithms foundation (Cornell BS), deep Python proficiency, and hands-on fluency with agentic coding workflows and LLM APIs. Drawn to applying AI directly inside the developer workflow for trading systems, and eager to go deeper on agents, MCP servers, retrieval, and evaluation infrastructure.",
+  "skills_html": "<b>Languages:</b> Python, SQL, Java (coursework/fundamentals)&nbsp;&nbsp;|&nbsp;&nbsp;<b>Data/Systems:</b> Pandas, AMPS message queues, high-throughput pipelines, concurrency, telemetry, Postgres, SQLite, Docker<br/><b>AI / Agentic:</b> Agentic coding &amp; orchestration, LLM APIs (Gemini), tool-augmented workflows<br/><b>Practices:</b> Performance optimization, data pipeline design, code review, documentation &amp; communication, Git",
+  "projects": [
+    "<b>Polymarket Scanner</b> (Flask, Discord API, SQLite) \u2014 Scans Polymarket for large trades and unusual/potential insider activity, pushing real-time alerts to Discord. <i>Market-microstructure signal detection.</i>",
+    "<b>Market Data Dashboard</b> (Grafana, Postgres, Docker, Twilio) \u2014 Ingests OI, funding, and other market data from Binance and Hyperliquid APIs; dashboards plus SMS alerts on signal triggers.",
+    "<b>Reading Recommendations App</b> (Flask, Gemini API, SQLite) \u2014 <b>LLM-powered</b> daily recommender over a Project Gutenberg corpus; takes user preferences and returns a tailored short work each day."
+  ]
+}

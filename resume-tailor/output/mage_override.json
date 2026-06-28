@@ -1,0 +1,50 @@
+{
+  "company_slug": "Mage",
+  "contact": "rtang0203@gmail.com&nbsp;&nbsp;|&nbsp;&nbsp;732-666-2746&nbsp;&nbsp;|&nbsp;&nbsp;U.S. Citizen",
+  "summary": "Software engineer with 4+ years building and optimizing high-throughput, production-critical data pipelines processing tens of millions of daily transactions. Deep Python proficiency, hands-on API design and orchestration experience, and strong foundations in concurrency, retry logic, and error handling. Cornell CS graduate with growing experience in LLM APIs and generative AI tooling.",
+  "skills_html": "<b>Languages:</b> Python, SQL, Java (fundamentals)&nbsp;&nbsp;|&nbsp;&nbsp;<b>Frameworks/Infra:</b> FastAPI (familiar), Flask, Docker, Postgres, SQLite, Redis (exposure), Git, GitHub Actions (exposure)<br/><b>Data/Systems:</b> High-throughput pipelines, concurrency, AMPS message queues, Pandas, API design &amp; orchestration, retries &amp; error handling<br/><b>AI / ML:</b> LLM APIs, agentic coding &amp; orchestration, ML data processing &amp; annotation&nbsp;&nbsp;|&nbsp;&nbsp;<b>Practices:</b> Performance optimization, pipeline design, code review, documentation",
+  "experience": [
+    {
+      "role": "Software Engineer &mdash; Bank of America",
+      "dates": "Aug 2022 &ndash; Present",
+      "sub": "Cirrus OTC Trade Reporting &nbsp;|&nbsp; Python, Pandas, Quartz, AMPS",
+      "bullets": [
+        "Designed and built <b>production orchestration</b> across multiple services processing <b>tens of millions of transactions daily</b>, with retries, error handling, and load balancing.",
+        "Built an extensible <b>reference-data framework</b>: pipeline of services connected via message queues, querying multiple external APIs per event and handling failures gracefully.",
+        "Implemented a <b>T+1 Unique Trade Identifier service</b> validating trade-ID uniqueness across counterparties and issuing corrections at millions of transactions per day.",
+        "Developed a parallelized <b>high-volume backreporting service</b>, automating a previously manual process with substantial speed and throughput gains.",
+        "Designed clean <b>API interfaces</b> between services: internal model transformer (to outgoing XML) and a response parser to update transaction statuses.",
+        "Optimized reliability, latency, and throughput of core services by orders of magnitude; authored Python/Pandas tooling to analyze 50&ndash;100GB datasets."
+      ]
+    },
+    {
+      "role": "Data Analyst (Contract) &mdash; Microsoft",
+      "dates": "Mar 2022 &ndash; Aug 2022",
+      "sub": "Viva Topics &nbsp;|&nbsp; Python, Pandas, Jupyter",
+      "bullets": [
+        "Processed and annotated data used to <b>train ML models</b>; built Python pipelines to clean, transform, and report on user-collected datasets for the data science team."
+      ]
+    },
+    {
+      "role": "Engineering Intern &mdash; Northrop Grumman",
+      "dates": "Fall 2019, Summer 2020",
+      "sub": "NX, ANSYS",
+      "bullets": [
+        "Designed and released 50+ engineering drawings including flight and test components; performed structural analyses for large assemblies and fastener stacks."
+      ]
+    }
+  ],
+  "projects": [
+    "<b>Reading Recommendations App</b> (Flask, Gemini API, SQLite) &mdash; Built an <b>LLM-powered</b> daily recommender integrating generative AI APIs over a Project Gutenberg corpus, handling API orchestration and error handling.",
+    "<b>Market Data Dashboard</b> (Postgres, Docker, Twilio) &mdash; Ingests market data from multiple external APIs (Binance, Hyperliquid); automated alerting pipeline with SMS notifications on signal triggers.",
+    "<b>Polymarket Scanner</b> (Flask, Discord API, SQLite) &mdash; Scans Polymarket for large trades and unusual activity; lightweight API backend with real-time alert delivery."
+  ],
+  "education": {
+    "role": "Cornell University, College of Engineering &mdash; Ithaca, NY",
+    "dates": "Sep 2017 &ndash; Dec 2021",
+    "sub": "B.S. Computer Science &nbsp;&amp;&nbsp; B.S. Mechanical Engineering &nbsp;|&nbsp; GPA 3.7",
+    "bullets": [
+      "<b>CUAIR (Cornell Unmanned Aircraft)</b> &mdash; Developed systems for an autonomous plane including obstacle avoidance, object classification, and airdrop; top-performing team at the AUVSI SUAS competition."
+    ]
+  }
+}

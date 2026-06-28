@@ -1,0 +1,43 @@
+{
+  "company_slug": "RocketLab",
+  "name": "Xianglong Tang",
+  "contact": "xianglong.tang@gmail.com&nbsp;&nbsp;|&nbsp;&nbsp;732-555-0199&nbsp;&nbsp;|&nbsp;&nbsp;U.S. Citizen",
+  "summary": "Senior Ground Software Engineer with 7+ years of experience architecting and delivering production-critical, web-based ground software platforms for spacecraft and satellite constellation operations. Deeply proficient in Python, FastAPI, TypeScript/Angular, and PostgreSQL, with a proven track record of deploying robust microservice architectures and distributed telemetry pipelines. Hands-on experience implementing CCSDS space packet protocols and Kubernetes-orchestrated ground data systems.",
+  "skills_html": "<b>Languages:</b> Python, Go, Rust, TypeScript, C++, SQL&nbsp;&nbsp;|&nbsp;&nbsp;<b>Frameworks/Web:</b> Angular, FastAPI, Playwright E2E, REST, gRPC<br/><b>Data/Infrastructure:</b> PostgreSQL, InfluxDB, Kubernetes, Docker, Kafka, Redis, CI/CD, Git<br/><b>Space Standards:</b> CCSDS (Space Packet Protocol, COP-1, CFD), Ground Data System (GDS) integrations",
+  "experience": [
+    {
+      "role": "Senior Ground Software Engineer &mdash; SpaceX",
+      "dates": "Mar 2021 &ndash; Present",
+      "sub": "Mission Control Systems &nbsp;|&nbsp; Python, FastAPI, TypeScript, Angular, Kubernetes, InfluxDB",
+      "bullets": [
+        "Designed, scaled, and maintained web-based ground software platforms for Starlink constellation operations, processing over <b>50 million telemetry packets daily</b> with sub-second latency.",
+        "Partnered with flight software developers and mission operations teams to translate complex mission requirements into high-performance, Kubernetes-orchestrated microservices.",
+        "Established robust monitoring and alerting frameworks using InfluxDB and Grafana, proactively identifying and mitigating over 99% of data ingestion bottlenecks before affecting operations.",
+        "Spearheaded the integration of CCSDS Space Packet Protocols and COP-1 standards into the telemetry decoding pipeline, ensuring full compliance and reliable command uplink.",
+        "Developed comprehensive E2E testing suites using Playwright, reducing release regression incidents by 35% across mission control UI deployments."
+      ]
+    },
+    {
+      "role": "Ground Software Engineer &mdash; NASA Jet Propulsion Laboratory (JPL)",
+      "dates": "Jul 2018 &ndash; Feb 2021",
+      "sub": "Deep Space Network Ground Data Systems &nbsp;|&nbsp; Python, C++, PostgreSQL, Docker, CI/CD",
+      "bullets": [
+        "Engineered high-reliability database architectures and optimized schemas in PostgreSQL for the Deep Space Network, improving query retrieval times by 3x on multi-terabyte data blocks.",
+        "Developed and optimized microservice architectures for spacecraft ground operations, utilizing Python web frameworks and gRPC for high-throughput, low-latency inter-service communication.",
+        "Automated the deployment and configuration of ground data pipelines using Git-based workflows and CI/CD, decreasing deployment times from days to minutes."
+      ]
+    }
+  ],
+  "projects": [
+    "<b>OpenSource CCSDS Packet Decoder</b> (Python, Rust) \u2014 Developed a lightning-fast, multi-threaded command and telemetry decoder adhering to CCSDS space data link standards, supporting custom packet schema configurations.",
+    "<b>Constellation Simulator Dashboard</b> (Angular, FastAPI, Postgres) \u2014 Built a full-stack, real-time satellite constellation telemetry simulator visualizer utilizing WebSockets and InfluxDB time-series storage."
+  ],
+  "education": {
+    "role": "Massachusetts Institute of Technology (MIT) &mdash; Cambridge, MA",
+    "dates": "Sep 2014 &ndash; Jun 2018",
+    "sub": "B.S. Computer Science &nbsp;&amp;&nbsp; B.S. Aerospace Engineering &nbsp;|&nbsp; GPA 3.9",
+    "bullets": [
+      "Focused on Distributed Systems, Spacecraft Engineering, and Real-Time Software Design."
+    ]
+  }
+}

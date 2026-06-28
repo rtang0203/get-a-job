@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+"""
+Reusable one-page resume PDF builder for ideal-resume-builder.
+Takes a JSON file override and merges it into default content.
+
+Usage:
+  python build_resume.py path/to/content.json
+"""
+import sys, json, os, copy
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+from reportlab.lib.enums import TA_CENTER, TA_LEFT
+from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, Table,
+                                TableStyle, HRFlowable)
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib import colors
+
+# ----------------------------------------------------------------------------
+# DEFAULT CONTENT (generic fallback, override using JSON)
+# ----------------------------------------------------------------------------
+CONTENT = {
+    "name": "Xianglong Tang",
+    "contact": "xianglong.tang@gmail.com&nbsp;&nbsp;|&nbsp;&nbsp;732-555-0199&nbsp;&nbsp;|&nbsp;&nbsp;U.S. Citizen",
+    "company_slug": "Ideal",
+    "summary": (
+        "Principal software engineer with a proven track record of architecting "
+        "and scaling high-throughput, mission-critical distributed systems. Expertise "
+        "in optimizing low-latency data pipelines, microservices, and robust cloud/infrastructure platforms."
+    ),
+    "skills_html": (
+        "<b>Languages:</b> Python, C++, Go, Rust, SQL<br/>"
+        "<b>Data/Systems:</b> PostgreSQL, Kubernetes, Docker, Kafka, gRPC, Redis, Distributed Systems<br/>"
+        "<b>Practices:</b> Systems Architecture, CI/CD, Performance Tuning, Agile Leadership, Testing"
+    ),
+    "experience": [
+        {
+            "role": "Principal Software Engineer &mdash; Leading Tech Corp",
+            "dates": "Jan 2021 &ndash; Present",
+            "sub": "Core Infrastructure &nbsp;|&nbsp; Go, Kubernetes, gRPC, PostgreSQL",
+            "bullets": [
+                "Designed and implemented a distributed microservices platform processing millions of requests per second.",
+                "Optimized database architectures and queries, reducing system latency by 40% and infrastructure costs by 25%.",
+            ],
+        }
+    ],
+    "projects": [
+        "<b>Distributed Event Bus</b> (Go, Kafka, Docker) \u2014 Built a high-performance, low-latency publish-subscribe event broker with sub-millisecond delivery guarantees.",
+    ],
+    "education": {
+        "role": "Stanford University &mdash; Stanford, CA",
+        "dates": "Sep 2014 &ndash; Jun 2018",
+        "sub": "B.S. Computer Science &nbsp;|&nbsp; GPA 3.9",
+        "bullets": [
+            "Specialized in Systems and Artificial Intelligence.",
+        ],
+    },
+}
+
+
+def deep_merge(base, override):
+    """Deep-merge override into base. Lists are replaced wholesale, not appended."""
+    result = copy.deepcopy(base)
+    for key, val in override.items():
+        if isinstance(val, dict) and isinstance(result.get(key), dict):
+            result[key] = deep_merge(result[key], val)
+        else:
+            result[key] = copy.deepcopy(val)
+    return result
+
+DARK = colors.HexColor("#1a1a1a")
+ACCENT = colors.HexColor("#2c3e50")
+GREY = colors.HexColor("#444444")
+
+
+def build(content, out_path):
+    doc = SimpleDocTemplate(out_path, pagesize=letter, topMargin=0.5*inch,
+                            bottomMargin=0.45*inch, leftMargin=0.6*inch, rightMargin=0.6*inch)
+    s = getSampleStyleSheet()
+    name_style = ParagraphStyle("name", parent=s["Normal"], fontName="Helvetica-Bold",
+                                fontSize=20, textColor=DARK, alignment=TA_CENTER, leading=23, spaceAfter=2)
+    contact_style = ParagraphStyle("contact", parent=s["Normal"], fontName="Helvetica",
+                                   fontSize=9, textColor=GREY, alignment=TA_CENTER)
+    section_style = ParagraphStyle("section", parent=s["Normal"], fontName="Helvetica-Bold",
+                                   fontSize=11, textColor=ACCENT, spaceBefore=9, spaceAfter=2, leading=13)
+    role_style = ParagraphStyle("role", parent=s["Normal"], fontName="Helvetica-Bold",
+                                fontSize=10, textColor=DARK, spaceBefore=4, leading=12)
+    sub_style = ParagraphStyle("sub", parent=s["Normal"], fontName="Helvetica-Oblique",
+                               fontSize=9, textColor=GREY, spaceAfter=2, leading=11)
+    bullet_style = ParagraphStyle("bullet", parent=s["Normal"], fontName="Helvetica",
+                                  fontSize=9, textColor=GREY, leading=11.5, leftIndent=10, spaceAfter=1.5)
+    body_style = ParagraphStyle("body", parent=s["Normal"], fontName="Helvetica",
+                                fontSize=9, textColor=GREY, leading=11.5, spaceAfter=2)
+    summary_style = ParagraphStyle("summary", parent=s["Normal"], fontName="Helvetica",
+                                   fontSize=9, textColor=GREY, leading=12, alignment=TA_LEFT)
+    rdate_style = ParagraphStyle("rdate", parent=role_style, alignment=2,
+                                 fontName="Helvetica", textColor=GREY, fontSize=9)
+    story = []
+
+    def hr():
+        story.append(HRFlowable(width="100%", thickness=0.6, color=ACCENT, spaceAfter=3))
+
+    def role_line(left, right):
+        t = Table([[Paragraph(left, role_style), Paragraph(right, rdate_style)]],
+                  colWidths=[5.1*inch, 2.2*inch])
+        t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "BOTTOM")] +
+                              [(p, (0, 0), (-1, -1), 0) for p in
+                               ("LEFTPADDING", "RIGHTPADDING", "TOPPADDING", "BOTTOMPADDING")]))
+        story.append(t)
+
+    def block(item):
+        role_line(item["role"], item["dates"])
+        if item.get("sub"):
+            story.append(Paragraph(item["sub"], sub_style))
+        for b in item["bullets"]:
+            story.append(Paragraph(b, bullet_style, bulletText="\u2022"))
+
+    story.append(Paragraph(content["name"], name_style))
+    story.append(Paragraph(content["contact"], contact_style))
+    story.append(Spacer(1, 4))
+
+    story.append(Paragraph("SUMMARY", section_style)); hr()
+    story.append(Paragraph(content["summary"], summary_style))
+
+    story.append(Paragraph("TECHNICAL SKILLS", section_style)); hr()
+    story.append(Paragraph(content["skills_html"], body_style))
+
+    story.append(Paragraph("EXPERIENCE", section_style)); hr()
+    for item in content["experience"]:
+        block(item)
+
+    story.append(Paragraph("PROJECTS", section_style)); hr()
+    for p in content["projects"]:
+        story.append(Paragraph(p, bullet_style, bulletText="\u2022"))
+
+    story.append(Paragraph("EDUCATION", section_style)); hr()
+    block(content["education"])
+
+    doc.build(story)
+    return out_path
+
+
+if __name__ == "__main__":
+    content = copy.deepcopy(CONTENT)
+    if len(sys.argv) > 1:
+        with open(sys.argv[1]) as f:
+            content = deep_merge(content, json.load(f))
+    out_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "output")
+    os.makedirs(out_dir, exist_ok=True)
+    out = os.path.join(out_dir, f"Xianglong_Tang_Ideal_Resume_{content.get('company_slug','Tailored')}.pdf")
+    build(content, out)
+    print("Wrote", out)

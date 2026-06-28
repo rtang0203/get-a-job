@@ -1,0 +1,50 @@
+{
+  "company_slug": "HappyRobot",
+  "contact": "rtang0203@gmail.com&nbsp;&nbsp;|&nbsp;&nbsp;732-666-2746&nbsp;&nbsp;|&nbsp;&nbsp;U.S. Citizen",
+  "summary": "Production backend engineer who owns problems end-to-end — from ambiguous requirements to shipped, reliable systems. 3+ years building high-throughput Python services processing tens of millions of daily transactions, integrating with third-party APIs, and translating stakeholder needs into working solutions. Hands-on AI/ML builder (LLM-powered pipelines, ML data processing, prompt engineering) with a strong foundation in API design and autonomous execution. Cornell CS.",
+  "skills_html": "<b>Languages:</b> Python, SQL, JavaScript, TypeScript (building), Java (fundamentals)&nbsp;&nbsp;|&nbsp;&nbsp;<b>Frameworks/Infra:</b> Flask, FastAPI, React (building), Node.js (building), Docker, Postgres, SQLite, Git<br/><b>AI / ML:</b> LLM APIs (Anthropic, Gemini), agentic coding &amp; orchestration, ML data processing &amp; annotation, prompt engineering<br/><b>Data/Systems:</b> High-throughput pipelines, concurrency, AMPS message queues, Pandas, BeautifulSoup, API design &amp; third-party integrations, WebSocket",
+  "experience": [
+    {
+      "role": "Software Engineer &mdash; Bank of America",
+      "dates": "Aug 2022 &ndash; Current",
+      "sub": "Cirrus OTC Trade Reporting &nbsp;|&nbsp; Python, Pandas, Quartz, AMPS",
+      "bullets": [
+        "Owned production Python services on the OTC trade reporting engine, processing <b>tens of millions of transactions daily</b> across the bank with high reliability and real consequences for failure.",
+        "Designed and shipped an extensible <b>reference-data framework</b>: pipeline of services via message queues querying multiple <b>third-party APIs</b> per event, with retries, load balancing, and graceful error handling.",
+        "Built a <b>T+1 trade validation service</b> checking trade-ID uniqueness across counterparties and issuing corrections at millions of transactions/day &mdash; scoped, designed, and shipped independently.",
+        "Developed a parallelized <b>high-volume backreporting service</b>, automating a manual process with significant speed and throughput gains &mdash; identified the bottleneck and owned the fix end-to-end.",
+        "Operated with <b>high autonomy</b> across teams, translating ambiguous requirements from operations and compliance stakeholders into working technical solutions.",
+        "Optimized service reliability and throughput by orders of magnitude; built Python/Pandas tooling to investigate issues across 50&ndash;100GB datasets."
+      ]
+    },
+    {
+      "role": "Data Analyst (Contract) &mdash; Microsoft",
+      "dates": "Mar 2022 &ndash; Aug 2022",
+      "sub": "Viva Topics &nbsp;|&nbsp; Python, Pandas, Jupyter",
+      "bullets": [
+        "Built data processing and annotation pipelines for <b>production ML models</b> on the Viva Topics service; cleaned, transformed, and reported on user-collected datasets for the data science team."
+      ]
+    },
+    {
+      "role": "Engineering Intern &mdash; Northrop Grumman",
+      "dates": "Fall 2019, Summer 2020",
+      "sub": "NX, ANSYS",
+      "bullets": [
+        "Released 50+ engineering drawings including new designs and large assemblies; performed structural analyses for flight and test components."
+      ]
+    }
+  ],
+  "projects": [
+    "<b>Med-Spa Lead-Gen Pipeline</b> (Python, SQLite, Google Places API, Anthropic API, BeautifulSoup) &mdash; End-to-end pipeline discovering businesses via <b>Google Places API</b>, enriching web presence, scoring deficiency signals, and generating personalized outreach hooks via <b>Claude LLM</b>. 8 idempotent stages, 20 tests.",
+    "<b>Market Data Dashboard</b> (Postgres, Docker, Twilio, Grafana) &mdash; Ingests live data from <b>multiple third-party APIs</b> (Binance, Hyperliquid); automated alerting pipeline with SMS notifications and dashboards.",
+    "<b>Reading Recommendations App</b> (Flask, Gemini API, SQLite) &mdash; <b>LLM-powered</b> daily recommender with prompt engineering, API orchestration, and error handling over a Project Gutenberg corpus."
+  ],
+  "education": {
+    "role": "Cornell University, College of Engineering &mdash; Ithaca, NY",
+    "dates": "Sep 2017 &ndash; Dec 2021",
+    "sub": "B.S. Computer Science &nbsp;&amp;&nbsp; B.S. Mechanical Engineering &nbsp;|&nbsp; GPA 3.7",
+    "bullets": [
+      "<b>CUAIR (Cornell Unmanned Aircraft)</b> &mdash; Built systems for an autonomous plane with obstacle avoidance, object classification, and airdrop; consistently top team at AUVSI SUAS competition."
+    ]
+  }
+}

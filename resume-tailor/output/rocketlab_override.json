@@ -1,0 +1,50 @@
+{
+  "company_slug": "RocketLab",
+  "contact": "rtang0203@gmail.com&nbsp;&nbsp;|&nbsp;&nbsp;732-666-2746&nbsp;&nbsp;|&nbsp;&nbsp;U.S. Citizen",
+  "summary": "Software engineer with 4+ years of experience designing and optimizing high-throughput distributed systems and data pipelines processing tens of millions of daily transactions. Strong systems-level thinking (Cornell BS in CS and Mechanical Engineering), deep Python/Postgres proficiency, and hands-on experience building robust monitoring, alerting, and parallelized data frameworks. U.S. citizen willing to relocate to Littleton, CO.",
+  "skills_html": "<b>Languages:</b> Python, SQL, Java (fundamentals/coursework)&nbsp;&nbsp;|&nbsp;&nbsp;<b>Data/Systems:</b> Postgres, SQLite, Pandas, AMPS message queues, Docker, high-throughput pipelines, concurrency, telemetry, microservices<br/><b>Web/Frameworks:</b> Python web frameworks (Flask), Grafana, REST APIs&nbsp;&nbsp;|&nbsp;&nbsp;<b>Practices:</b> Distributed systems architecture, performance optimization, CI/CD, Git, code review, documentation",
+  "experience": [
+    {
+      "role": "Software Engineer &mdash; Bank of America",
+      "dates": "Aug 2022 &ndash; Present",
+      "sub": "Cirrus OTC Trade Reporting &nbsp;|&nbsp; Python, Pandas, Quartz, AMPS",
+      "bullets": [
+        "Designed, built, and optimized <b>high-throughput, production-critical distributed pipelines</b> reporting all OTC trades, processing <b>tens of millions of transactions daily</b>.",
+        "Built an extensible <b>reference-data framework of microservices</b> connected via AMPS message queues querying multiple external sources, handling retries, load balancing, and failure mitigation.",
+        "Implemented a <b>T+1 Unique Trade Identifier service</b> validating trade-ID uniqueness across counterparties and issuing corrections, processing millions of transactions per day.",
+        "Developed a parallelized <b>high-volume backreporting service</b> to automate previously manual workflows, delivering substantial performance and throughput improvements.",
+        "Designed and implemented a data transformer (internal model to outgoing XML) and a DTCC response parser to update transaction statuses dynamically.",
+        "Partnered with upstream database/systems teams and downstream stakeholders to analyze 50&ndash;100GB datasets using Python/Pandas, optimizing system latency and data flows."
+      ]
+    },
+    {
+      "role": "Data Analyst (Contract) &mdash; Microsoft",
+      "dates": "Mar 2022 &ndash; Aug 2022",
+      "sub": "Viva Topics &nbsp;|&nbsp; Python, Pandas, Jupyter",
+      "bullets": [
+        "Collaborated with the data science team on Viva Topics; wrote Python scripts to process, clean, and annotate user data used to train ML models."
+      ]
+    },
+    {
+      "role": "Engineering Intern &mdash; Northrop Grumman",
+      "dates": "Fall 2019, Summer 2020",
+      "sub": "NX, ANSYS",
+      "bullets": [
+        "Designed and released 50+ aerospace engineering drawings including flight and test components; performed structural analyses for large assemblies and detailed fastener stacks."
+      ]
+    }
+  ],
+  "projects": [
+    "<b>Market Data Dashboard</b> (Grafana, Postgres, Docker, Twilio) \u2014 Ingests OI, funding, and other market data from Binance and Hyperliquid APIs; designs schema and sets up dashboards plus automated SMS alerts on signal triggers.",
+    "<b>Polymarket Scanner</b> (Flask, Discord API, SQLite) \u2014 Scans Polymarket for large trades and unusual activity; implements a lightweight backend database and pushes real-time alerts to Discord.",
+    "<b>Reading Recommendations App</b> (Flask, Gemini API, SQLite) \u2014 Implemented an LLM-powered daily recommender over a Project Gutenberg corpus."
+  ],
+  "education": {
+    "role": "Cornell University, College of Engineering &mdash; Ithaca, NY",
+    "dates": "Sep 2017 &ndash; Dec 2021",
+    "sub": "B.S. Computer Science &nbsp;&amp;&nbsp; B.S. Mechanical Engineering &nbsp;|&nbsp; GPA 3.7",
+    "bullets": [
+      "<b>CUAIR (Cornell Unmanned Aircraft)</b> \u2014 Developed systems for an autonomous plane including obstacle avoidance, object classification, and airdrop; top-performing team at the AUVSI SUAS competition."
+    ]
+  }
+}

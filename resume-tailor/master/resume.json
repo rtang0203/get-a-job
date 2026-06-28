@@ -1,0 +1,94 @@
+{
+  "name": "Randy Tang",
+  "contact": {
+    "email": "rtang0203@gmail.com",
+    "phone": "732-666-2746",
+    "location_note": "Open to on-site (confirm relocation per role)"
+  },
+  "work_authorization": "U.S. Citizen",
+  "education": [
+    {
+      "school": "Cornell University, College of Engineering",
+      "location": "Ithaca, NY",
+      "dates": "Sep 2017 - Dec 2021",
+      "degrees": ["B.S. Computer Science", "B.S. Mechanical Engineering"],
+      "gpa": "3.7",
+      "activities": [
+        "CUAIR (Cornell Unmanned Aircraft) — autonomous plane with obstacle avoidance, object classification, airdrop; consistently top team at AUVSI SUAS competition."
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Bank of America",
+      "title": "Software Engineer",
+      "team": "Cirrus OTC Trade Reporting",
+      "dates": "Aug 2022 - Present",
+      "stack": ["Python", "Pandas", "Quartz", "AMPS message queues"],
+      "facts": [
+        "Cirrus trade reporting team — responsible for reporting all OTC trades through the bank.",
+        "Designed, implemented, and improved high-throughput data pipelines processing tens of millions of transactions daily.",
+        "Reference-data framework: pipeline of services via AMPS queues querying multiple external sources per trade event; handles retries, API calls, load balancing; extensible for new sources.",
+        "T+1 UTI (Unique Trade Identifier) service: validates trade-ID uniqueness across counterparties, sends corrections; millions of transactions/day.",
+        "High-volume backreporting service: parallelized, automated a formerly manual process, large speed/throughput gains.",
+        "Transformer service (internal model -> outgoing XML) + DTCC response parser to update transaction status.",
+        "Optimized services to improve speed/throughput/reliability by orders of magnitude.",
+        "Python/Pandas scripts to scrape and analyze 50-100GB datasets."
+      ]
+    },
+    {
+      "company": "Microsoft",
+      "title": "Data Analyst (Contract)",
+      "team": "Viva Topics",
+      "dates": "Mar 2022 - Aug 2022",
+      "stack": ["Python", "Pandas", "Jupyter"],
+      "facts": [
+        "Supported data science team on Viva Topics; processed/analyzed data used to train ML models.",
+        "Wrote Python scripts to clean, annotate, and generate reports on user- and tester-collected data."
+      ]
+    },
+    {
+      "company": "Northrop Grumman",
+      "title": "Engineering Intern",
+      "dates": "Fall 2019, Summer 2020",
+      "stack": ["NX", "ANSYS"],
+      "facts": [
+        "Released 50+ engineering drawings incl. new designs and large assemblies; fully designed/drafted/released multiple flight and test components.",
+        "Structural analyses for large assemblies and detailed fastener-stack analyses."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Med-Spa Lead-Gen Pipeline",
+      "stack": ["Python", "SQLite", "Google Places API", "Anthropic API", "BeautifulSoup"],
+      "desc": "Batch pipeline that discovers med-spas across metros via Google Places, enriches each lead's web presence (booking widgets, social, SSL, mobile), scores deficiency signals, generates personalized outreach hooks via Claude, and exports a ranked review queue. 8 idempotent stages, 20 tests, mock mode for offline dev.",
+      "tags": ["pipeline", "api", "lead-gen", "scraping"]
+    },
+    {
+      "name": "Polymarket Scanner",
+      "stack": ["Flask", "Discord API", "SQLite"],
+      "desc": "Scans Polymarket for large trades and unusual/potential insider activity; alerts to Discord.",
+      "tags": ["trading", "market-data", "signals"]
+    },
+    {
+      "name": "Market Data Dashboard",
+      "stack": ["Grafana", "Twilio", "Postgres", "Docker"],
+      "desc": "Pulls market data (OI, funding, etc.) from Binance and Hyperliquid APIs; dashboard + SMS alerts on signal triggers.",
+      "tags": ["trading", "market-data", "infra"]
+    },
+    {
+      "name": "Reading Recommendations App",
+      "stack": ["Flask", "Gemini API", "SQLite"],
+      "desc": "LLM-powered daily recommender over a Project Gutenberg corpus from user preferences.",
+      "tags": ["llm", "api"]
+    }
+  ],
+  "skills": {
+    "languages": ["Python", "SQL"],
+    "languages_hedged": ["Java (fundamentals)"],
+    "data_systems": ["Pandas", "AMPS message queues", "high-throughput pipelines", "concurrency", "Postgres", "SQLite", "Docker", "Flask", "FastAPI", "BeautifulSoup", "Google Places API"],
+    "ai_agentic": ["Agentic coding & orchestration", "LLM APIs", "tool-augmented workflows"],
+    "practices": ["Performance optimization", "data pipeline design", "web scraping & enrichment", "code review", "documentation & communication", "Git"]
+  }
+}
