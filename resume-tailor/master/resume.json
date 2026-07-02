@@ -61,10 +61,10 @@
   ],
   "projects": [
     {
-      "name": "Med-Spa Lead-Gen Pipeline",
-      "stack": ["Python", "SQLite", "Google Places API", "Anthropic API", "BeautifulSoup"],
-      "desc": "Batch pipeline that discovers med-spas across metros via Google Places, enriches each lead's web presence (booking widgets, social, SSL, mobile), scores deficiency signals, generates personalized outreach hooks via Claude, and exports a ranked review queue. 8 idempotent stages, 20 tests, mock mode for offline dev.",
-      "tags": ["pipeline", "api", "lead-gen", "scraping"]
+      "name": "Benchmark Agency Platform",
+      "stack": ["Next.js", "React", "TypeScript", "Tailwind", "Recharts", "Supabase", "Python", "SQLite", "Google Places API", "Anthropic API", "BeautifulSoup"],
+      "desc": "Technical platform for a medspa consulting agency (3+ paying clients). Built a multi-tenant financial-intelligence dashboard (revenue trends, equipment P&L, staff comp, AI-generated recommendations) with row-level security and cross-practice benchmarking architecture. Built a lead-gen pipeline that discovers med-spas across metros via Google Places, enriches web presence, scores deficiency signals, and generates personalized outreach via Claude. 8 idempotent stages, 20 tests.",
+      "tags": ["full-stack", "multi-tenant", "applied-ai", "pipeline", "lead-gen"]
     },
     {
       "name": "Polymarket Scanner",
@@ -86,9 +86,9 @@
     }
   ],
   "skills": {
-    "languages": ["Python", "SQL"],
+    "languages": ["Python", "TypeScript", "SQL"],
     "languages_hedged": ["Java (fundamentals)"],
-    "data_systems": ["Pandas", "AMPS message queues", "high-throughput pipelines", "concurrency", "Postgres", "SQLite", "Docker", "Flask", "FastAPI", "BeautifulSoup", "Google Places API"],
+    "data_systems": ["Pandas", "AMPS message queues", "high-throughput pipelines", "concurrency", "Postgres", "SQLite", "Docker", "Flask", "FastAPI", "Next.js", "React", "Tailwind", "Recharts", "Supabase", "BeautifulSoup", "Google Places API"],
     "ai_agentic": ["Agentic coding & orchestration", "LLM APIs", "tool-augmented workflows"],
     "practices": ["Performance optimization", "data pipeline design", "web scraping & enrichment", "code review", "documentation & communication", "Git"]
   }

@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-Append an entry to the application tracker (output/applications.json).
+Append or update an entry in the application tracker (output/applications.json).
+
+If a matching company+role already exists, the entry is updated in place
+(with the date refreshed) instead of duplicated.
 
 Usage:
   python track_application.py \
@@ -50,6 +53,7 @@ def main():
     args = p.parse_args()
 
     tracker = load_tracker()
+
     entry = {
         "date": date.today().isoformat(),
         "company": args.company,
@@ -61,10 +65,23 @@ def main():
         "notes": args.notes,
         "status": "tailored",
     }
-    tracker.append(entry)
-    save_tracker(tracker)
-    print(f"Tracked: {args.company} — {args.role} ({args.verdict})")
+
+    # Dedup: update in place if company+role already exists
+    existing_idx = None
+    for i, e in enumerate(tracker):
+        if e["company"] == args.company and e["role"] == args.role:
+            existing_idx = i
+            break
+
+    if existing_idx is not None:
+        tracker[existing_idx] = entry
+        print(f"Updated: {args.company} — {args.role} ({args.verdict})")
+    else:
+        tracker.append(entry)
+        print(f"Tracked: {args.company} — {args.role} ({args.verdict})")
+
     print(f"  Total applications: {len(tracker)}")
+    save_tracker(tracker)
 
 
 if __name__ == "__main__":

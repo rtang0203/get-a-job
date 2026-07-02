@@ -40,18 +40,18 @@
     "action": "Apply with targeted cover letter",
     "pdf": "Randy_Tang_Resume_HappyRobot.pdf",
     "url": "https://jobs.ashbyhq.com/happyrobot.ai/ec6a0aba-306e-4a5e-a33e-9fa4b4dcc49e",
-    "notes": "Key gaps: no production React/TS/Node, thin LLM prompting experience, no voice AI. Strengths: Chicago local, strong Python/API integration, autonomy/ownership.",
+    "notes": "Strong Python/API/AI match. Gaps: React, TypeScript, Node.js (full-stack req). No voice/transcriber exp. Cover letter should address frontend ramp.",
     "status": "tailored"
   },
   {
-    "date": "2026-06-27",
-    "company": "HappyRobot",
-    "role": "Forward Deployed Engineer",
+    "date": "2026-06-30",
+    "company": "William Blair",
+    "role": "Senior AI Engineer (AI Innovation Function)",
     "verdict": "plausible fit",
-    "action": "Apply with targeted cover letter",
-    "pdf": "Randy_Tang_Resume_HappyRobot.pdf",
-    "url": "https://jobs.ashbyhq.com/happyrobot.ai/ec6a0aba-306e-4a5e-a33e-9fa4b4dcc49e",
-    "notes": "Strong Python/API/AI match. Gaps: React, TypeScript, Node.js (full-stack req). No voice/transcriber exp. Cover letter should address frontend ramp.",
+    "action": "Apply now",
+    "pdf": "Randy_Tang_Resume_WilliamBlair.pdf",
+    "url": "",
+    "notes": "Recruiter reached out. Capital markets experience is key differentiator. Gaps: multi-agent production, ML fundamentals, Azure/Databricks/Dagster, Salesforce. Years 3.5 vs 5+ but recruiter-initiated.",
     "status": "tailored"
   }
 ]

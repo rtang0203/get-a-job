@@ -83,3 +83,48 @@
 - **Completed:** resume.json + resume_master.md updated, fit assessment, tailored 1-page PDF, application tracked
 - **Decisions made:** "Plausible fit / Apply with cover letter"; Med-Spa project added to master resume
 - **Next session priorities:** Consider building Voice-Enabled AI Agent Demo (React + TS + Node.js + voice) to close HappyRobot's full-stack and voice gaps
+
+
+## 2026-06-30: Benchmark Dashboard Project Added to Master Resume
+- **What was decided:**
+  - Added Benchmark Dashboard as the first project in `resume.json` and `resume_master.md`. It's a multi-tenant financial-intelligence dashboard (Next.js, React, TypeScript, Tailwind, Recharts, Supabase) built for a medspa consulting agency Randy is co-building with an ex-IB/PE friend.
+  - Promoted TypeScript from unlisted to a primary language in skills (no longer hedged — Randy built a full Next.js/TS app).
+  - Added Next.js, React, Tailwind, Recharts, Supabase to data_systems skills.
+  - Context sourced from a shared Claude conversation detailing the project planning, architecture decisions (multi-tenant from day one, RLS, benchmarking schema), data-layer research (Vagaro/Boulevard API constraints), and design direction.
+- **Why:**
+  - Benchmark Dashboard demonstrates full-stack product building, applied AI (recommendations engine), multi-tenant architecture, and fast iteration — all directly relevant to FDE roles. Also closes the React/TypeScript gap previously flagged for HappyRobot.
+- **What was rejected and why:**
+  - Nothing rejected. All additions grounded in real work Randy has done/is doing.
+
+## 2026-06-30: Grouped Benchmark Projects + William Blair Tailoring
+- **What was decided:**
+  - Grouped Benchmark Dashboard and Med-Spa Lead-Gen Pipeline into a single "Benchmark Agency Platform" entry in resume.json and resume_master.md. Tells a cohesive FDE story rather than two separate side projects.
+  - Tailored resume for William Blair Senior AI Engineer (AI Innovation Function). Recruiter reached out.
+  - Verdict: "plausible fit / Apply now" — capital markets experience at BofA is the key differentiator most AI engineers lack. Benchmark embedded work maps directly to their FDE model.
+  - Dropped Polymarket Scanner from this tailoring (least relevant to IB). Merged two BofA bullets to fit one page.
+  - Compressed Benchmark description to fit; kept emphasis on paying clients, multi-tenant, AI recommendations, and embedded-with-founder narrative.
+- **Why:**
+  - Recruiter-initiated contact overrides the usual 5+ years gate concern. Capital markets + FDE-style work is the play.
+- **What was rejected and why:**
+  - Rejected claiming Databricks, Azure, Salesforce, or multi-agent production experience — genuine voids, not reframeable. Surfaced as gaps in fit assessment.
+
+## 2026-06-30: Resume-Tailor Skill Improvements
+- **What was decided:**
+  - Added format-2 semantic overrides to build_resume.py — experience keyed by company name (only bullets needed), projects via include/exclude lists, skills as structured categories with `join_next` for layout control, `**bold**` auto-converted to HTML. Legacy overrides still work via `"format"` key detection.
+  - Added page-count check: build script now prints "OK: 1 page." or "WARNING: N pages" after every build.
+  - Created gen_master_md.py — auto-generates resume_master.md from resume.json. One source of truth.
+  - Updated track_application.py with dedup — re-tailoring same company+role updates in place.
+  - Added JD archiving instruction to SKILL.md (save to `output/<company>_jd.txt`).
+  - Standardized fit assessment output (always write `output/fit_assessment_<company>.md`).
+  - Fixed duplicate HappyRobot entry in applications.json.
+  - Updated README.md with full format-2 schema docs.
+- **Why:**
+  - Reduce per-tailoring friction: less HTML boilerplate, no manual page checking, no file sync, no tracker duplicates.
+- **What was rejected and why:**
+  - Rejected auto-layout for skills (dynamic line grouping) — too magic; explicit `join_next` flag is clearer and matches existing visual patterns.
+
+## Session Summary (2026-06-30)
+- **Worked on:** Resume-tailor skill improvements (6 items), Benchmark project grouping, William Blair tailoring
+- **Completed:** All 6 improvements implemented and tested; William Blair resume converted to format-2
+- **Decisions made:** Format-2 as default going forward; legacy overrides preserved for backward compat; resume_master.md is now auto-generated
+- **Next session priorities:** Continue building Benchmark backend; build anchor-project-2 (agentic tool + eval harness) to close multi-agent and eval framework gaps

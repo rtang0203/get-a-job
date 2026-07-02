@@ -1,0 +1,52 @@
+{
+  "format": 2,
+  "company_slug": "WilliamBlair",
+  "contact_extras": ["U.S. Citizen"],
+  "summary": "Software engineer with 3+ years building production-critical data systems at a global bank (OTC trade reporting, tens of millions of daily transactions). Full-stack builder across Python pipelines, React/TypeScript dashboards, and LLM-powered applications. Currently co-building a deployed AI platform for a consulting agency — embedded with the founder, translating business needs into shipped tools at speed. Cornell CS & ME.",
+
+  "skills": [
+    {"label": "Languages", "items": ["Python", "TypeScript", "SQL", "Java (fundamentals)"], "join_next": true},
+    {"label": "Frameworks/Infra", "items": ["Next.js", "React", "Flask", "FastAPI", "Supabase", "Postgres", "SQLite", "Docker", "Git"]},
+    {"label": "AI / Agentic", "items": ["LLM APIs (Anthropic Claude, Gemini)", "agentic coding & orchestration", "prompt engineering", "tool-augmented workflows"]},
+    {"label": "Data/Systems", "items": ["High-throughput pipelines", "AMPS message queues", "concurrency", "Pandas", "data pipeline design", "API integrations", "performance optimization"]}
+  ],
+
+  "experience": {
+    "Bank of America": [
+      "Owned production services on the OTC **trade reporting** engine, processing **tens of millions of transactions daily** across the bank's capital markets operations.",
+      "Designed and shipped an extensible **reference-data framework**: orchestrated pipeline of services via message queues querying multiple external APIs per trade event, with retries, load balancing, and error handling.",
+      "Built a **T+1 trade validation service** checking trade-ID uniqueness across counterparties and issuing automated corrections at millions of transactions/day.",
+      "Developed a parallelized **backreporting service**, automating a manual process with significant throughput gains — scoped solution and shipped independently.",
+      "Operated with **high autonomy across teams**, translating requirements from operations and compliance stakeholders into production-grade solutions; optimized service reliability and throughput by orders of magnitude."
+    ],
+    "Microsoft": [
+      "Built data processing and annotation pipelines for **production ML models**; cleaned, transformed, and reported on user-collected datasets for the data science team."
+    ],
+    "Northrop Grumman": [
+      "Released 50+ engineering drawings including new designs and large assemblies; performed structural analyses for flight and test components."
+    ]
+  },
+
+  "projects": {
+    "include": ["Benchmark Agency Platform", "Market Data Dashboard", "Reading Recommendations App"],
+    "overrides": {
+      "Benchmark Agency Platform": {
+        "stack": ["Next.js", "React", "TypeScript", "Supabase", "Python", "Anthropic API"],
+        "desc": "Technical platform for a consulting agency with **paying clients**. Multi-tenant **financial-intelligence dashboard** (revenue, equipment P&L, staff comp, **AI-generated recommendations**) with row-level security. Lead-gen pipeline: discovery, web enrichment, deficiency scoring, and personalized outreach via **Claude**. Embedded with founder — rapid prototyping from real user feedback."
+      },
+      "Market Data Dashboard": {
+        "stack": ["Postgres", "Docker", "Twilio", "Grafana"],
+        "desc": "Ingests live data from **multiple financial APIs** (Binance, Hyperliquid); automated **alerting pipeline** with SMS notifications and monitoring dashboards."
+      },
+      "Reading Recommendations App": {
+        "desc": "**LLM-powered** recommender with prompt engineering, API orchestration, and error handling over a Project Gutenberg corpus."
+      }
+    }
+  },
+
+  "education": {
+    "bullets": [
+      "**CUAIR (Cornell Unmanned Aircraft)** — Built systems for an autonomous plane with obstacle avoidance, object classification, and airdrop; consistently top team at AUVSI SUAS competition."
+    ]
+  }
+}

@@ -6,12 +6,16 @@ Usage:
   python build_resume.py                        # build from master/resume.json defaults
   python build_resume.py path/to/override.json  # deep-merge override on top of defaults
 
-The override JSON only needs the fields you want to change — everything else
-is derived from master/resume.json automatically. No more full-content copies.
+Supports two override formats:
+  - Legacy (default): a CONTENT dict deep-merged over defaults from resume.json.
+    Override must provide fully-rendered HTML strings for skills, experience, etc.
+  - Format 2 ("format": 2): semantic overrides keyed by company name / project name.
+    The build script renders HTML from structured data automatically.
+    See README.md for the format-2 schema.
 
 Deps: pip install reportlab --break-system-packages
 """
-import sys, json, os, copy
+import sys, json, os, copy, re
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
@@ -24,6 +28,24 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
 MASTER_JSON = os.path.join(PROJECT_DIR, "master", "resume.json")
 
+
+# ---------------------------------------------------------------------------
+# Markup helpers
+# ---------------------------------------------------------------------------
+
+def convert_markup(text):
+    """Convert **bold** markers to <b> tags for ReportLab Paragraph rendering.
+
+    Leaves existing HTML tags untouched. Handles &amp; for ampersands when they
+    appear outside of existing HTML entities.
+    """
+    text = re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', text)
+    return text
+
+
+# ---------------------------------------------------------------------------
+# Master loader (legacy format)
+# ---------------------------------------------------------------------------
 
 def load_master():
     """Load master/resume.json and convert to the CONTENT format the builder expects."""
@@ -91,6 +113,172 @@ def load_master():
     }
 
 
+# ---------------------------------------------------------------------------
+# Format-2 semantic override
+# ---------------------------------------------------------------------------
+
+def apply_semantic_override(override):
+    """Build CONTENT dict from master/resume.json + a format-2 semantic override.
+
+    Format-2 overrides reference master data by name (company, project) and only
+    provide the fields that differ.  The build script pulls titles, dates, stacks,
+    and descriptions from resume.json and renders HTML automatically.
+
+    Schema (all fields optional except company_slug):
+      {
+        "format": 2,
+        "company_slug": "AcmeCorp",
+        "summary": "plain text with **bold** markers",
+        "contact_extras": ["U.S. Citizen"],
+        "skills": [
+          {"label": "Languages", "items": ["Python", "SQL"], "join_next": true},
+          {"label": "Infra", "items": ["Docker", "Postgres"]}
+        ],
+        "experience": {
+          "Bank of America": ["bullet one with **bold**", "bullet two"]
+        },
+        "projects": {
+          "include": ["Project A", "Project B"],
+          "overrides": {
+            "Project A": {"desc": "custom description", "stack": ["Python"]}
+          }
+        },
+        "education": {
+          "bullets": ["custom activity line"]
+        }
+      }
+    """
+    with open(MASTER_JSON) as f:
+        m = json.load(f)
+
+    # -- Contact --
+    contact = f"{m['contact']['email']}&nbsp;&nbsp;|&nbsp;&nbsp;{m['contact']['phone']}"
+    for extra in override.get("contact_extras", []):
+        contact += f"&nbsp;&nbsp;|&nbsp;&nbsp;{extra}"
+
+    # -- Summary --
+    summary = convert_markup(override.get("summary", m.get("summary", "")))
+
+    # -- Skills --
+    if "skills" in override:
+        parts = []
+        cats = override["skills"]
+        i = 0
+        while i < len(cats):
+            cat = cats[i]
+            items_str = ", ".join(cat["items"])
+            segment = f"<b>{cat['label']}:</b> {items_str}"
+
+            # join_next: put the next category on the same line with |
+            if cat.get("join_next") and i + 1 < len(cats):
+                next_cat = cats[i + 1]
+                next_items = ", ".join(next_cat["items"])
+                segment += f"&nbsp;&nbsp;|&nbsp;&nbsp;<b>{next_cat['label']}:</b> {next_items}"
+                i += 2
+            else:
+                i += 1
+
+            parts.append(segment)
+
+        skills_html = "<br/>".join(parts)
+    else:
+        # Fall back to master skills
+        skills = m["skills"]
+        langs = ", ".join(skills["languages"])
+        if skills.get("languages_hedged"):
+            langs += ", " + ", ".join(skills["languages_hedged"])
+        data_sys = ", ".join(skills["data_systems"])
+        ai = ", ".join(skills["ai_agentic"])
+        practices = ", ".join(skills["practices"])
+        skills_html = (
+            f"<b>Languages:</b> {langs}&nbsp;&nbsp;|&nbsp;&nbsp;"
+            f"<b>Data/Systems:</b> {data_sys}<br/>"
+            f"<b>AI / Agentic:</b> {ai}<br/>"
+            f"<b>Practices:</b> {practices}"
+        )
+
+    # -- Experience --
+    exp_overrides = override.get("experience", {})
+    experience = []
+    for exp in m["experience"]:
+        company = exp["company"]
+        stack_str = ", ".join(exp.get("stack", []))
+
+        if company in exp_overrides:
+            ov = exp_overrides[company]
+            # Simple form: list of bullet strings
+            if isinstance(ov, list):
+                bullets = [convert_markup(b) for b in ov]
+            # Dict form: {bullets: [...], stack: [...]}
+            elif isinstance(ov, dict):
+                bullets = [convert_markup(b) for b in ov.get("bullets", exp["facts"])]
+                if "stack" in ov:
+                    stack_str = ", ".join(ov["stack"])
+            else:
+                bullets = [f.rstrip(".") + "." for f in exp["facts"]]
+        else:
+            bullets = [f.rstrip(".") + "." for f in exp["facts"]]
+
+        entry = {
+            "role": f"{exp['title']} &mdash; {exp['company']}",
+            "dates": exp["dates"].replace(" - ", " &ndash; "),
+            "sub": (f"{exp.get('team', '')} &nbsp;|&nbsp; {stack_str}"
+                    if exp.get("team") else stack_str),
+            "bullets": bullets,
+        }
+        experience.append(entry)
+
+    # -- Projects --
+    proj_config = override.get("projects", {})
+    include_list = proj_config.get("include")
+    proj_overrides = proj_config.get("overrides", {})
+
+    master_projects = {p["name"]: p for p in m["projects"]}
+
+    if include_list is None:
+        include_list = [p["name"] for p in m["projects"]]
+
+    projects = []
+    for name in include_list:
+        proj = master_projects.get(name)
+        if not proj:
+            print(f"WARNING: Project '{name}' not found in resume.json, skipping.")
+            continue
+        ov = proj_overrides.get(name, {})
+        stack = ov.get("stack", proj["stack"])
+        desc = convert_markup(ov.get("desc", proj["desc"]))
+        stack_str = ", ".join(stack)
+        projects.append(f"<b>{name}</b> ({stack_str}) \u2014 {desc}")
+
+    # -- Education --
+    edu = m["education"][0]
+    edu_ov = override.get("education", {})
+    degrees = " &nbsp;&amp;&nbsp; ".join(edu["degrees"])
+    raw_bullets = edu_ov.get("bullets", edu.get("activities", []))
+    edu_bullets = [convert_markup(b) for b in raw_bullets]
+    edu_entry = {
+        "role": f"{edu['school']} &mdash; {edu['location']}",
+        "dates": edu["dates"].replace(" - ", " &ndash; "),
+        "sub": f"{degrees} &nbsp;|&nbsp; GPA {edu['gpa']}",
+        "bullets": edu_bullets,
+    }
+
+    return {
+        "name": m["name"],
+        "contact": contact,
+        "company_slug": override.get("company_slug", "Tailored"),
+        "summary": summary,
+        "skills_html": skills_html,
+        "experience": experience,
+        "projects": projects,
+        "education": edu_entry,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Legacy deep merge
+# ---------------------------------------------------------------------------
+
 def deep_merge(base, override):
     """Deep-merge override into base. Lists are replaced wholesale, not appended."""
     result = copy.deepcopy(base)
@@ -102,12 +290,21 @@ def deep_merge(base, override):
     return result
 
 
+# ---------------------------------------------------------------------------
+# PDF builder
+# ---------------------------------------------------------------------------
+
 DARK = colors.HexColor("#1a1a1a")
 ACCENT = colors.HexColor("#2c3e50")
 GREY = colors.HexColor("#444444")
 
 
 def build(content, out_path):
+    page_count = [0]
+
+    def on_page(canvas, doc):
+        page_count[0] = doc.page
+
     doc = SimpleDocTemplate(out_path, pagesize=letter, topMargin=0.5*inch,
                             bottomMargin=0.45*inch, leftMargin=0.6*inch, rightMargin=0.6*inch)
     s = getSampleStyleSheet()
@@ -170,16 +367,34 @@ def build(content, out_path):
     story.append(Paragraph("EDUCATION", section_style)); hr()
     block(content["education"])
 
-    doc.build(story)
+    doc.build(story, onFirstPage=on_page, onLaterPages=on_page)
+
+    # -- Page-count check --
+    if page_count[0] > 1:
+        print(f"WARNING: Resume is {page_count[0]} pages (target is 1). Trim content.")
+    elif page_count[0] == 1:
+        print("OK: 1 page.")
+
     return out_path
 
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     content = load_master()
     if len(sys.argv) > 1:
         with open(sys.argv[1]) as f:
             override = json.load(f)
-        content = deep_merge(content, override)
+
+        if override.get("format") == 2:
+            # Semantic override: build content from master + override
+            content = apply_semantic_override(override)
+        else:
+            # Legacy: deep-merge rendered override onto defaults
+            content = deep_merge(content, override)
+
     out_dir = os.path.join(PROJECT_DIR, "output")
     os.makedirs(out_dir, exist_ok=True)
     out = os.path.join(out_dir, f"Randy_Tang_Resume_{content.get('company_slug','Tailored')}.pdf")

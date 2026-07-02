@@ -10,7 +10,8 @@ Tailor a master resume to one job description. Optimize ordering, emphasis, and 
 ## Inputs
 - A job description: either a URL (fetch it) or pasted text.
 - `master/resume.json` — structured source of truth (facts the agent reasons over).
-- `master/resume_master.md` — human-readable master (for reference / quick edits).
+- `master/resume_master.md` — auto-generated human-readable master (regenerate with
+  `python3 scripts/gen_master_md.py` after editing `resume.json`).
 
 ## Operating principles 
 1. **Never fabricate.** No invented tools, metrics, titles, or domains. If the JD wants
@@ -35,25 +36,27 @@ Tailor a master resume to one job description. Optimize ordering, emphasis, and 
 1. **Acquire the JD.** If a URL, fetch it. Extract: title, company, location, comp,
    work-authorization/sponsorship notes, hard requirements ("What You Bring"/"Required"),
    nice-to-haves, and the recurring themes/keywords.
+   **Archive the JD text** to `output/<company>_jd.txt` so it survives if the posting is taken down.
 2. **Fit assessment.** Using `scripts/fit_rubric.md`, write a candid assessment:
    genuine strengths (mapped to JD), real weaknesses/gaps, and any hard disqualifiers.
    If a disqualifier exists (no sponsorship + candidate needs it; on-site in a city the
    candidate won't relocate to), say so plainly and ask whether to proceed.
+   **Write the fit assessment** to `output/fit_assessment_<company>.md` (always a file, not just inline).
 3. **Plan the tailoring.** Decide ordering and emphasis:
    - Reorder sections/bullets so the most JD-relevant content is highest.
    - Rewrite bullets in the JD's vocabulary where the underlying fact supports it.
    - Reorder projects so domain-relevant ones lead (e.g. trading firm -> market projects).
    - Add a 3-4 line summary tuned to the role's core theme.
    - Build a skills line that front-loads JD-matched skills; hedge thin ones honestly.
-4. **Build the PDF.** Write a JSON override to `output/<company>_override.json` containing
-   only the fields that differ from the defaults derived from `master/resume.json` (e.g.
-   `company_slug`, `summary`, `skills_html`, reordered `experience`/`projects`). The build
-   script deep-merges the override onto the base. Run:
-   `python3 resume-tailor/scripts/build_resume.py resume-tailor/output/<company>_override.json`
-5. **Verify.** Confirm the PDF is exactly one page with no fabricated content.
-   Use `pdftotext -layout` if available; otherwise fall back to reading the PDF
-   via `read` tool or counting `/Type /Page` markers in the raw bytes with Python.
-   Check: one page, no overflow, no garbled glyphs, contact line intact.
+4. **Build the PDF.** Write a format-2 JSON override to `output/<company>_override.json`.
+   Format-2 overrides are semantic: experience keyed by company name (only bullets that
+   change), projects controlled via `include` list and optional `overrides`, skills as
+   structured categories. Use `**bold**` for emphasis (auto-converted to HTML).
+   See `README.md` for the full format-2 schema.
+   Run: `python3 resume-tailor/scripts/build_resume.py resume-tailor/output/<company>_override.json`
+   The build script prints a page-count check — if it says WARNING, trim content and rebuild.
+5. **Verify.** Confirm the build script reported "OK: 1 page." and that no content is
+   fabricated. Read the PDF via `read` tool to spot-check content and formatting.
 6. **Suggest a gap-closing project.** Based on the fit assessment's real weaknesses,
    propose one concrete side project that would close the biggest gaps. Be specific:
    name the tools/frameworks from the JD the project should use, describe what it builds,
@@ -62,7 +65,8 @@ Tailor a master resume to one job description. Optimize ordering, emphasis, and 
    If the candidate is already a strong fit with no significant gaps, say so and skip.
 7. **Track the application.** Run `scripts/track_application.py` with the company, role,
    verdict, recommended action, PDF filename, JD URL, and a short notes string summarizing
-   key gaps. This appends to `output/applications.json` for a single view of all tailoring runs.
+   key gaps. The tracker deduplicates: re-tailoring the same company+role updates the
+   existing entry instead of creating a duplicate.
 8. **Report.** Output the fit assessment, the PDF path, the changelog, and the project suggestion.
 
 ## Checklist (run before delivering)
@@ -76,8 +80,13 @@ Tailor a master resume to one job description. Optimize ordering, emphasis, and 
 - [ ] Job description keywords are integrated accurately where facts align.
 
 ## Outputs
-1. Fit assessment (strengths / gaps / disqualifiers).
-2. `output/<Name>_Resume_<Company>.pdf`.
-3. Changelog mapping each change to a JD requirement.
-4. Gap-closing project suggestion (specific tools, what to build, which gaps it fills).
-5. Updated `output/applications.json` tracker entry.
+1. `output/fit_assessment_<company>.md` — fit assessment file.
+2. `output/<company>_jd.txt` — archived JD text.
+3. `output/<Name>_Resume_<Company>.pdf` — tailored one-page resume.
+4. Changelog mapping each change to a JD requirement (inline in chat).
+5. Gap-closing project suggestion (specific tools, what to build, which gaps it fills).
+6. Updated `output/applications.json` tracker entry.
+
+## Maintenance
+- When your career changes, edit `master/resume.json` then run
+  `python3 scripts/gen_master_md.py` to regenerate the markdown. One source of truth.
