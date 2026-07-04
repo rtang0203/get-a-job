@@ -1,0 +1,50 @@
+{
+  "format": 2,
+  "company_slug": "Trading",
+  "summary": "Software engineer with 3+ years building **high-throughput, real-time data pipelines** processing tens of millions of daily transactions at a global bank. Deep **Python** and **SQL** proficiency with hands-on experience in **event-driven architectures**, message queues, and performance optimization. Active personal trader (crypto and prediction markets) with a track record of building **trader-facing market-data and alerting tools**.",
+  "contact_extras": ["U.S. Citizen"],
+
+  "skills": [
+    {"label": "Languages", "items": ["Python (advanced)", "SQL", "TypeScript", "Java (fundamentals)"], "join_next": true},
+    {"label": "Data & Systems", "items": ["High-throughput pipelines", "AMPS message queues (pub/sub)", "concurrency", "Pandas", "Postgres", "SQLite", "Docker"]},
+    {"label": "Markets", "items": ["Exchange APIs (Binance, Hyperliquid, Kraken)", "market data (OI, funding, order flow)", "prediction markets"], "join_next": true},
+    {"label": "Practices", "items": ["Performance optimization", "real-time pipeline design", "code review", "Git"]}
+  ],
+
+  "experience": {
+    "Bank of America": [
+      "Designed and maintained **real-time data pipelines** processing **tens of millions of transactions daily** across multiple services with retries, error handling, and load balancing.",
+      "Built an extensible **reference-data framework**: event-driven pipeline of services connected via **AMPS message queues**, querying multiple external APIs per trade event and handling failures gracefully.",
+      "Implemented a T+1 **trade reconciliation service** validating trade-ID uniqueness across counterparties and issuing corrections at millions of transactions per day.",
+      "Developed a parallelized **high-volume backreporting service**, automating a previously manual process with substantial speed and throughput gains.",
+      "Built a transformer service (internal model → outgoing XML) and DTCC response parser to **reconcile transaction statuses** in real time.",
+      "Optimized reliability, latency, and throughput of production services by orders of magnitude; wrote Python/Pandas tooling to **analyze 50-100GB datasets**."
+    ],
+    "Microsoft": [
+      "Processed and annotated datasets used to train ML models; built Python pipelines to clean, transform, and generate reports on user-collected data for the data science team."
+    ],
+    "Northrop Grumman": [
+      "Designed and released 50+ engineering drawings including flight and test components; performed structural analyses for large assemblies and fastener stacks."
+    ]
+  },
+
+  "projects": {
+    "include": ["Market Data Dashboard", "Polymarket Scanner", "Benchmark Agency Platform"],
+    "overrides": {
+      "Market Data Dashboard": {
+        "desc": "Ingests **real-time market data** (open interest, funding rates) from **Binance and Hyperliquid APIs**; Grafana visualization dashboard with automated SMS alerts on signal triggers."
+      },
+      "Polymarket Scanner": {
+        "desc": "Scans Polymarket for **large trades and unusual activity**; real-time alerting pipeline delivering notifications to Discord."
+      },
+      "Benchmark Agency Platform": {
+        "desc": "Multi-tenant **financial-intelligence dashboard** (revenue trends, equipment P&L, AI-generated recommendations) for a consulting agency with **3+ paying clients**; includes an 8-stage lead-gen data pipeline (Google Places API + LLM scoring, 20 tests).",
+        "stack": ["Next.js", "TypeScript", "Supabase", "Python"]
+      }
+    }
+  },
+
+  "education": {
+    "bullets": ["**CUAIR (Cornell Unmanned Aircraft)** — autonomous plane systems: obstacle avoidance, object classification, airdrop; top team at AUVSI SUAS competition."]
+  }
+}

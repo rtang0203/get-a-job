@@ -53,5 +53,16 @@
     "url": "",
     "notes": "Recruiter reached out. Capital markets experience is key differentiator. Gaps: multi-agent production, ML fundamentals, Azure/Databricks/Dagster, Salesforce. Years 3.5 vs 5+ but recruiter-initiated.",
     "status": "tailored"
+  },
+  {
+    "date": "2026-07-03",
+    "company": "Millennium",
+    "role": "Python Developer - EQ Factor Model Risk Technology",
+    "verdict": "stretch",
+    "action": "Apply with targeted cover letter",
+    "pdf": "Randy_Tang_Resume_Millennium.pdf",
+    "url": "",
+    "notes": "Sell-side not buy-side is main risk; no Spark/Lakehouse/Barra experience; strong Python pipeline + SQL match",
+    "status": "tailored"
   }
 ]

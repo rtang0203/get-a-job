@@ -1,0 +1,24 @@
+Python Developer - EQ Factor Model Risk Technology
+Company: Millennium
+Location: Not specified (likely New York)
+
+Millennium is looking for an exceptional individual to join the Equity Factor Risk Model Technology team, which is responsible for building and enhancing the firm's equity portfolio analytics platform, including support for MSCI Barra equity factor risk models and the delivery of real-time analytics. This is an opportunity to work on highly data-intensive, compute-heavy distributed systems that power both historical and real-time portfolio analytics. The role offers strong learning potential, exposure to challenging technical problems, and the chance to contribute to impactful work at the intersection of engineering, data, and quantitative analytics.
+
+Principal Responsibilities
+- Build expertise in Barra and proprietary factor risk models
+- Architect and build big data infrastructure with the goal of an automated portfolio research environment
+- Identify, design, and implement internal process improvements: automating manual processes, optimizing data pipeline, re-designing infrastructure for greater scalability, etc.
+- Work with portfolio research team on the development and integration of new analytics models into the firm's delivery platforms
+- Perform extensive back-testing of existing and new risk factor models
+- Support and run processes for risk management and equity portfolio research
+
+Required Skills
+- Minimum of 3+ years Python development experience in buy-side financial firms
+- Advanced working knowledge of SQL
+- Experience designing and building data Lakehouse architecture is a significant plus.
+- Experience working with Spark and Trino/Spark compute, and expertise with open table formats such as Delta Lake and/or Iceberg is a significant plus.
+- Strong working knowledge of statistics.
+- Broad understanding of equity markets and portfolio construction.
+- Strong communication skills, as this role involves direct communication with risk management and trading.
+- Detail-oriented, a quick learner, and able to adapt to a dynamic, high-paced environment.
+- Demonstrated track record of success in challenging environments.

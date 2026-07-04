@@ -128,3 +128,28 @@
 - **Completed:** All 6 improvements implemented and tested; William Blair resume converted to format-2
 - **Decisions made:** Format-2 as default going forward; legacy overrides preserved for backward compat; resume_master.md is now auto-generated
 - **Next session priorities:** Continue building Benchmark backend; build anchor-project-2 (agentic tool + eval harness) to close multi-agent and eval framework gaps
+
+## 2026-07-03: Millennium EQ Factor Model Risk Technology Tailoring
+- **What was decided:**
+  - Assessed fit as "stretch / Apply with targeted cover letter." Main risk: JD explicitly requires "buy-side" experience; Randy's BofA experience is sell-side. Technical pipeline/SQL/Python skills are a strong match.
+  - Reframed BofA bullets to emphasize data pipeline scale, real-time processing, large dataset analysis, and automation — all mapping to JD's "data-intensive, compute-heavy distributed systems."
+  - Led with Market Data Dashboard project (equity/crypto market data, Postgres, Grafana) for domain relevance. Kept Polymarket Scanner for trading/signals angle.
+  - Added "back-testing" and "equity & crypto market data" to skills; added "statistics and algorithms" to summary to address JD's statistics requirement via Cornell CS foundation.
+  - Suggested gap-closing project: Equity Factor Risk Back-Tester using PySpark + Delta Lake + statsmodels to close Spark/Lakehouse/factor model/back-testing gaps.
+- **Why:**
+  - Millennium is a top-tier buy-side firm. Despite the sell-side gap, the technical match is strong and the JD frames several key skills (Barra, Spark/Lakehouse) as things to learn or "significant plus" rather than hard requirements.
+- **What was rejected and why:**
+  - Rejected listing Spark, Trino, Delta Lake, Iceberg, or Barra — zero documented experience. Surfaced as gaps in fit assessment.
+  - Rejected claiming "buy-side" experience or reframing BofA as buy-side adjacent — honesty principle.
+
+## 2026-07-03: Default Finance/Trading Firm Resume
+- **What was decided:**
+  - Built a reusable default resume for finance/trading firm applications: `output/trading_default_override.json` → `Randy_Tang_Resume_Trading.pdf`.
+  - Projects: Market Data Dashboard first (purest trading-infra signal), Polymarket Scanner second (market signals), Benchmark Agency Platform third compressed with trimmed stack (Next.js/TS/Supabase/Python) and finance framing (financial-intelligence dashboard, P&L, paying clients). Reading Recommendations App excluded (no finance signal).
+  - Crypto/trading in summary: included as ONE clause ("Active personal trader (crypto and prediction markets)") — dialed down from Akuna's two-sentence treatment. Exchange-level detail lives in a "Markets" skills line (framed as market data vocabulary, not a "Crypto" section).
+  - Not tracked in applications.json — it's a template, not an application.
+- **Why:**
+  - Prop shops/hedge funds/market makers (the default audience) view genuine personal trading as a differentiator and standard interview topic. Compliance-optics risk only applies to banks/asset managers, which would get a re-tailored resume anyway.
+- **What was rejected and why:**
+  - Rejected full Akuna-level crypto emphasis (named exchanges in summary, "connected in crypto community") — appropriate only when the JD explicitly wants crypto.
+  - Rejected dropping crypto entirely — loses a genuine differentiator for the target audience.

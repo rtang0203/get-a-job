@@ -1,0 +1,46 @@
+{
+  "format": 2,
+  "company_slug": "Millennium",
+  "summary": "Software engineer with 3+ years building **high-throughput, data-intensive production systems** at a global bank. Deep Python proficiency with hands-on experience designing and optimizing **real-time data pipelines** processing tens of millions of transactions daily. Strong **SQL** and data analysis skills, Cornell CS foundation in **statistics and algorithms**, and genuine interest in **equity markets and quantitative analytics**.",
+  "contact_extras": ["U.S. Citizen"],
+
+  "skills": [
+    {"label": "Languages", "items": ["Python (advanced)", "SQL (advanced)", "TypeScript"], "join_next": true},
+    {"label": "Data & Infra", "items": ["Pandas", "Postgres", "SQLite", "AMPS message queues (pub/sub)", "high-throughput pipelines", "concurrency", "Docker"]},
+    {"label": "Analytics & Markets", "items": ["Large-scale data analysis (50-100GB datasets)", "back-testing", "equity & crypto market data", "performance optimization"], "join_next": true},
+    {"label": "Tools", "items": ["Git", "Flask", "FastAPI", "Grafana", "LLM APIs"]}
+  ],
+
+  "experience": {
+    "Bank of America": [
+      "Designed and optimized **high-throughput data pipelines** processing tens of millions of OTC transactions daily across the firm's trade reporting platform.",
+      "Built a **reference-data framework**: pipeline of services via AMPS queues querying multiple external sources per trade event; handled retries, API calls, load balancing — extensible for new data sources.",
+      "Developed T+1 **UTI validation service** ensuring trade-ID uniqueness across counterparties with automated corrections; processed millions of transactions/day.",
+      "Parallelized and **automated a formerly manual** backreporting process, delivering large speed and throughput gains.",
+      "Built transformer service (internal model → outgoing XML) and **DTCC response parser** to update transaction status in real time.",
+      "Wrote Python/Pandas scripts to scrape, clean, and **analyze 50-100GB datasets** for trade reconciliation and reporting insights."
+    ],
+    "Microsoft": [
+      "Processed and analyzed large datasets in Python/Pandas used to train ML models; wrote data-cleaning and reporting scripts."
+    ]
+  },
+
+  "projects": {
+    "include": ["Market Data Dashboard", "Polymarket Scanner", "Benchmark Agency Platform"],
+    "overrides": {
+      "Market Data Dashboard": {
+        "desc": "Pulls **equity and crypto market data** (open interest, funding rates, price) from exchange APIs; stores in **Postgres**, visualizes in **Grafana** dashboards with configurable SMS alerts on signal triggers via Twilio."
+      },
+      "Polymarket Scanner": {
+        "desc": "Scans prediction markets for **large trades and unusual activity patterns**; applies signal detection logic and alerts to Discord for real-time monitoring."
+      },
+      "Benchmark Agency Platform": {
+        "desc": "Multi-tenant **financial-intelligence dashboard** (revenue trends, equipment P&L, staff comp, AI-generated recommendations) with row-level security. Built lead-gen **data pipeline** (8 idempotent stages, 20 tests) discovering businesses via Google Places API and scoring via LLM."
+      }
+    }
+  },
+
+  "education": {
+    "bullets": ["CUAIR (Cornell Unmanned Aircraft) — autonomous systems with obstacle avoidance, object classification; top team at AUVSI SUAS."]
+  }
+}
